@@ -1,0 +1,1129 @@
+
+TEXT
+[ctrl+d]:exit
+~~~~~~~~~~~
+date: Show the date & time.
+clear: To clear the screen.
+[ctrl+l]
+cal: To show the calender.
+cal 11 1876
+exit: exit/logout [ctrl+d]
+whoami: logged in username.
+~~~~~~~~~~~~
+COPY:
+-----
+- File to File:
+---------------
+# cp srcFilename dstFilename
+
+OR
+
+# cp -f srcFilename dstFilename
+
+-f [Forcefully]
+
+- Dir/File to Dir:
+------------------
+
+# cp -rfv srcFilename dstFilename
+
+-r [Recursive]- Parent to child - tree
+-v [Verbose]- To view the process in detail.
+-f [Forcefully]
+-----------------------
+Remove:
+-------
+File:
+-----
+# rm filename
+
+# rm -fv filename
+
+Dir:
+----
+# rm -rfv dirname
+
+-r [Recursive]- Parent to child - tree
+-f [Forcefully]
+---------------------------
+MOVE:
+-----
+
+# mv src dst 
+
+Rename:
+-------
+# mv oldname newname
+------------------------
+man <cmd>: Details of command.
+
+head filename: Print 10 lines.
+
+# head -n 5 filename
+
+tail: Print bottom 10 lines.
+
+# tail -n 5 filename
+
+file : To show the type of file.
+
+rmdir: Remove an empty dir.
+-------------------------
+echo "msg"
+
+echo "s3cr3t" > data.txt [ s3cr3t ]
+
+mkdir .admin [Hide]
+
+ls -a [All]
+--------------------------
+history
+!190
+history -c  [Clean]
+--------------------------
+Env Variables:
+
+To check all env variables:
+
+# env
+
+To print the value of variable:
+
+# echo $USER
+huntu
+
+Change the value of env variable:[For current working env only]
+
+# export HISTTIMEFORMAT="%d-%m-%y %T "
+
+%d => Day
+%m => Month
+%y => Year
+%T => Time
+===========================
+# tty [Console Identify]
+/dev/pts/0
+
+# echo "Hello" > /dev/pts/1
+===========================
+sort: Sort  the data.
+
+| [pipe sign]: 
+cmd1 | cmd2
+o/p --> i/p
+
+uniq : cat ulala.txt | sort | uniq
+
+cat ulala.txt | sort -u --version-sort
+
+wc: Word count
+
+# wc -l ulala.txt
+# cat ulala.txt | wc -l
+-------------------------
+#updatedb
+#locate name
+-------------------------
+To switch users:
+
+$ su - username
+
+switch User
+
+$ exit OR $ logout
+=========================
+# watch -n 1 "ls"
+
+[ctrl+c]: Terminate
+
+
+
+# ls -l [Show the dir content with details]
+
+# ls -l filename
+
+# ls -ld dirname
+==========
+Symbolic Link
+------------
+
+# ln -s /home/hunt/favicon.ico /tmp/softlink
+
+# ls -li /tmp/softlink
+1787 lrwxrwxrwx 1 hunt hunt 22 May 25 15:47 /tmp/softlink -> /home/hunt/favicon.ico
+
+# ls -li favicon.ico
+769 -rwxrwxrwx 1 hunt hunt 3262 May 25 14:15 favicon.ico
+
+~~~
+Hard Link:
+----------
+ln /home/hunt/favicon.ico /tmp/hard
+=====================
+Processes:
+----------
+PID
+
+# ps aux 
+
+# sleep 100 &
+
+# kill -9 PID
+====================
+Run Levels:
+-----------
+A. init 0 
+B. init 1
+C. init 2 
+D. init 3 
+E. init 4 
+F. init 5 
+G. init 6 
+==================================
+> : Stdout
+
+tee : As stdout & at the same time that will print the data on screen.
+
+GREP: Search a pattern OR string.
+egrep
+
+# grep "bash" filename 
+
+OR
+
+# cat filename | grep "string"
+
+| = OR
+\ = ignore
+^ = caret [Start]
+$ = dollar [End]
+[0-9]
+[A-Za-z]
+[0-9A-Za-z]
+
+saptarang.zip
+saptarang.zip.2021
+saptarang.zip2020
+saptarang.zipCDACUSERS2021
+saptarang/.zip
+saptarang.ZIP
+
+
+grep -iE "\.zip$|\.zip[0-9]+$|\.zip[A-Z0-9a-z]+|\.zip\.[0-9]+$|\/\.zip$"
+--------------------------------
+Tar: [.tar]
+----
++ Create
+
+# tar -cvf backup-home.tar /home
+# du -sch backup-home.tar
+
++ Extract
+
+# tar -xvf backup-home.tar
+
+# tar -xvf backup-home.tar -C /tmp
+
++ View
+
+# tar -tvf backup-home.tar
+-------------
+Gunzip + Tar: [-z] [.tgz]
+-------------
++ Create
+
+# tar -czvf backup-home.tgz /home
+# du -sch backup-home.tgz
+
++ Extract
+
+# tar -xzvf backup-home.tgz
+
+# tar -xzvf backup-home.tgz -C /tmp
+
++ View
+
+# tar -tzvf backup-home.tgz
+---------
+# unzip file.zip
+# unzip file.zip -d out
+====================================
+Users & Group Management:
+=-----------------------=
+
+Users' Info:
+------------
+# cat /etc/passwd
+
+UID [0-60000]	  | GID [0-60000]
+----------------------------------------
+0-999 Super Users | 0-999 Super groups
+1000+ Normal Users| 1000+ Normal groups
+----------------------------------------
+
+Password Info:
+--------------
+# cat /etc/shadow
+
+SHA512 + Salt Algo
+hunt:$1$4D87.3WeRnxS0:18700:0:99999:7:::
+
+Check the account age:
+----------------------
+# chage -l username
+
+Groups' info:
+-------------
+# cat /etc/group
+
+grp:x:1000:
+
+Password Info:
+--------------
+# cat /etc/gshadow
+grp:encryptedpass
+
+LAB:
+----
+
+1) Create a user:
+-----------------
+# adduser username
+
+# cat /etc/passwd | grep "natasha"
+# cat /etc/group | grep "natasha"
+# cat /etc/shadow | grep "natasha"
+# id natasha
+
+2) Change password:
+-------------------
+# passwd username 
+
+3) Delete User:
+---------------
+[+] Without Home Dir: # userdel username
+[+] With Home Dir: # userdel -r username
+
+4) Create a group:
+------------------
+# groupadd groupname
+
+# cat /etc/group | grep "groupname"
+
+5) Password for group:
+----------------------
+
+# gpasswd groupname
+
+# cat /etc/gshadow | grep "groupname"
+
+6) Membership [Add users in a group]:
+-------------------------------------
+[+] Primary Membership
+
+# groupadd grp
+# useradd -g grp u1
+
+-g [ Primary ]
+
+[+] Secondary Membership
+
+-> Create a user as a secondary member of a group:
+
+# groupadd grp2
+# useradd -G grp2 cdac1
+# id cdac1
+
+-> Add an existing user in a group as secondary member:
+
+# usermod -G grp2 natasha
+# usermod -G grp2 harry
+============================================
+Permissions:
+------------
+[+] Symbolic 
+~~~~~~~~~~~~
+read		: r
+write		: w
+execute 	: x
+
+user owner	: u
+group owner	: g
+others		: o
+all		: a
+
+Assign		: +
+Remove		: -
+overwrite	: =
+
+Permission Area:
+----------------
+# ls -l
+
+rwxr-xr-x root root  Mar 17 22:13 snap
+
+--- --- ---
+u    g   o
+
+Default Permissions for File: 644
+---------------------------------
+read & write	: u
+read		: g
+read		: o
+
+Default Permissions for Dir: 755
+--------------------------------
+read, write & execute	: u
+read & execute 		: g
+read & execute		: o
+
+
+[!] Change/Modify Perm :
+------------------------
+# chmod u+w file/dir
+# chmod g=rw file/dir
+# chmod u-rw,g+r,o=wx file/dir
+# chmod a=r file/dir
+
+[+] Numeric
+~~~~~~~~~~~
+
+read	: 4
+write	: 2
+execute	: 1
+Full	: 7
+No	: 0
+
+---	000	0
+r--	100	4
+-w-	010	2
+--x	001	1
+rwx	111	7
+
+[!] Change/Modify Perm :
+------------------------
+# chmod 700 file/dir
+=====================================
+Q. You need to change the permissions of a file named schedule.txt such that the file owner can edit the file, users who are members of the group that owns the file can edit it, and users who are not owners and don't belong to the owning group can view it but not modify it. Which command will do this?
+
+224
+
+Q. How do you print the lines between 5 and 10, both inclusive?
+
+cat file1 | head | tail -6
+
+Q. Create a new file “new.txt” that is a concatenation of “file1.txt” and “file2.txt”
+
+cat file1.txt file2.txt > new.txt
+
+Q. What is the output of the following code:
+
+os=Unix
+echo 1.$os 2."$os" 3.'$os' 4.$os
+_________________________________
+
+cat file|grep "hello"
+
+grep -v ""
+
+awk '{print $2}'
+
+
+
+awk -F "." '{print $1}' 
+awk -F "." '{print $NF}' 
+awk -F "." '{print $1 "-" $2 "-" $3}'
+
+cut -d"." -f1
+cut -d"." -f1,2
+cut -d"." -f1-4
+cut -d"." -f1-
+------------------------------------
+Display all the info which includes:
+
+-> CPU manufacturer [/proc/cpuinfo]
+-> Total number of cores
+-> Total number of memory [in GB]
+-> Current free RAM [in GB]
+____________________________________
+VIM: Editor
+----
+# vim filename
+
+i 	: To go to insert mode.
+Esc	: Go back to command mode.
+yy [yanked] : Coppy the current line.
+p : paste
+nyy [n=1,2,3...] : Copy n lines.
+dd : Cut / delete the current line.
+
+Last Line:
+----------
+/word : To search a string.
+:%s/origword/newword: replace
+:set nu : show line numbers
+:set nonu: ---
+:w [Write] : svae the file.
+:q [quit] : quit the file.
+:wq : write & quit.
+:wq! : write & quit forcefully.
+:exit
+___________________________________
+Umask octal values:
+-------------------
+
+file 
+
+666 - 022 = 644
+
+dir 
+
+777 - 022 = 755
+
+To check unames:
+
+# umask
+-----------------------------------
+
+file: passwords.txt
+user owner	: root [7]
+group owner	: root [7]
+others		: 98 [0]
+
+2 other users: mohit & sneha [5]
+
+[-] Membership 
+---------
+# groupadd dep
+# usermod -G dep mohit
+# usermod -G dep sneha
+
+[-] Ownership
+----------
+[!] User owner:
+
+# chown username file/dir
+
+[!] Group owner:
+
+# chgrp groupname file/dir
+
+
+# chgrp dep passwords.txt
+
+file: passwords.txt
+user owner	: root [7]
+group owner	: dep [5]
+others		: 98 [0]
+
+
+[-] chmod 
+----------
+# chmod 750 passwords.txt
+---------------
+
+file: passwords.txt
+user owner	: root [7]
+group owner	: root [7]
+others		: 100 [0]
+
+2 other users: mohit & sneha [5]
+2 other users: natasha & json [7]
+---------------
+ACL [ Access Control List ]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# setfacl -m u:harry:rw- file/dir
+
+# setfacl -m g:grp:rwx file/dir
+
+Permission Area:
+---
+rw-rwxr--+ [ACL Applied]
+
+check ACL:
+----------
+# getfacl file/dir
+__________________________________
+1. Create the following users, groups, and group memberships:
+
+-A group named admin
+-A user harry who belongs to admin as a secondary group
+-A user natasha who also belongs to admin as a secondary group
+-A user sarah, who is not a member of admin
+-harry, natasha, and sarah should all have the password of password
+
+2. You need to change the owner of a file named /tmp/exe from harry, who is a member of the users group, to natasha, who is a member of the editors group. Assuming you want to change both user and group owners, which command will do this?
+
+3. Your Linux system's umask variable is currently set to a value of 077. A user named 'json' (who is a member of the users group) creates a dir named /tasks. What can users who are members of the users group do with this file?
+
+4. Create a collaborative directory /common/adm with the following characteristics:
+
+-Group ownership of /common/adm is admin
+
+-The directory should be readable, writable, and accessible to members of admin, but not to any other user. (It is understood that root has access to all ﬁles and directories on the system.)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Alias:
+------
+Current:
+
+# alias
+
+Create:
+
+# alias pwd='ls'
+
+Remove:
+
+# unalias pwd
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Q. Create a Command Shell Environment on machine. : 
+-Create a command 'qstat'.
+
+-It should able to execute the following command ( ps -eo pid,tid,class,rtprio,ni,pri,psr,pcpu,stat,comm )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Media mounting:
+---------------
+
+HDD : /dev/sda
+	     \_/dev/sda1
+	     \_/dev/sda2
+USB : /dev/sdb
+
+CD/DVD : /dev/sr0
+
+[+] Mount:
+----------
+- check inserted media
+ #  watch -n 1 "dmesg|tail"
+
+# mount /dev/sr0 /mnt
+
+- Unmount:
+-----------
+# df -h
+
+# umount /dev/sr0
+		
+-------------------------------------------------------------
+
+Network :
+
+To check IP & MAC: 
+
+# ifconfig 
+OR
+# ip addr
+OR
+# ip a
+
+To check gateway's IP:
+
+# route -n
+
+CentOS [server] : 192.168.91.100
+Ubuntu [client] : 192.168.91.132
+
+TUI & CLI :
+
+# nmtui [ Network Manager text-mode User Interface ]
+
+Check the conn b/w devices:
+
+# ping x.x.x.x -c 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Install & Uninstall packages:
+-----------------------------
+ubuntu:
+-------
+# apt update 		[ Check updates ]
+# apt upgrade 		[ To upgrade ]
+# apt dist-upgrade	[ Dist Upgrade ]
+
+# apt install package_name 
+# apt remove package_name [ To remove package ]
+
+CentOS:
+-------
+# dnf update
+# dnf upgrade
+
+# dnf install package_name
+# dnf remove package_name
+_________________________________________________
+Telnet, OpenSSH, vsFTP
+
+
+[+] Telnet: Remote management tool. You can access the remote machine/server on CLI.
+-----------
+
+Port : 23
+
+
+1) Install telnet on both machines.
+
+# dnf install telnet-server
+
+2) Start the service:
+
+# systemctl start telnet.socket
+# systemctl status telnet.socket
+
+#lsof -i:23
+
+3) Lets try to access the remote machine:
+
+# telnet x.x.x.x
+
+login:
+password: 
+
+
+firewalld:
+
+#systmctl stop firewalld
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OpenSSH: Secure Shell
+--------
+1) install ssh
+
+# dnf install openssh
+
+2) Config OpenSSH:
+
+# vim /etc/ssh/sshd_config
+
+Uncomment entry:
+
+Port 22
+
+PermitRootLogin yes
+
+:wq
+
+3) Start the service:
+
+# systemctl start sshd
+# systemctl status sshd
+
+#lsof -i:22
+
+4) Try to access remote machine:
+
+# ssh root@x.x.x.x
+
+# ssh x.x.x.x
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+vsFTP [ Very Secure File Transfer Protocol ]
+-----
+Port 21
+
+1) install it
+
+# dnf install vsftpd
+
+2) Default DocumentRoot:
+
+# cd /var/ftp/pub
+
+3) Start service:
+
+# systemctl start vsftpd
+
+4) Access ftp via URL:
+
+ftp://serverIP
+_________________________________
+# vim script.sh 
+
+#!/bin/bash [Declare the env]
+cmd1
+cmd2
+cmd3
+cmd4
+
+:wq
+
+# chmod +x script.sh
+
+# bash script.sh
+OR
+# ./script.sh  
+OR
+# bash -x script.sh [exe & debug]
+---------
+Variables:
+``````````
+a=2
+echo $a
+-----
+read var
+
+read -p "Bruh!!!" var
+
+read -t 5 a
+-----
+cmd -> o/p 
+
+a=$(pwd)
+--------------
+
+Arithmetic:
+-----------
+$((EXP))
+
+echo $((2+2))
+~~~~
+expr $a + $b
+expr $a - $b
+expr $a / $b
+expr $a \* $b
+--------------
+Positional Parameter:
+-----------
+# set Linux is best
+
+# echo $1
+Linux
+
+# echo $2
+is
+
+# echo $3
+best
+
+# echo $#
+3
+
+# set `cat filename`
+OR
+# set $(cmd) [Subshell exe]
+------------------
+Exit Code:
+----------
+# ls
+0 => Success
+
+# lsd
+1+ => Failed
+
+Check:
+
+# echo $?
+---------------------------
+
+Conditions:
+-----------
+
+1) if...then...fi
+
+#!/bin/bash
+read -p "Bruh enter : " a
+
+if [ "$a" == "0" ];then
+echo "Pratik toh le gya boss!"
+fi
+
+2) if...then...else...fi
+
+#!/bin/bash
+read -p "Bruh enter : " a
+
+if [ "$a" == "0" ];then
+echo "Pratik toh le gya boss!"
+else
+echo "Pratik, na ho payega"
+fi
+
+3) if...then...elif...then...fi
+
+#!/bin/bash
+read -p "Bruh enter : " a
+
+if [ "$a" == "y" ];then
+echo "Pratik toh le gya boss!"
+elif [ "$a" == "n" ];then
+echo "Pratik, Bas!"
+fi
+
+4) if...then...elif...then...else...fi
+
+#!/bin/bash
+read -p "Bruh enter : " a
+
+if [ "$a" == "y" ];then
+echo "Pratik toh le gya boss!"
+elif [ "$a" == "n" ];then
+echo "Pratik, Bas!"
+else
+echo "Friend Zone/ Cut gya"
+fi
+=================================
+
+Domain 		[facebook.com]
+Sub-domain [beta.facebook.com
+
+
+domain.com
+sub.domain.com
+
+
+# host cdac.in
+
+I/O Streams:
+------------
++ stdin [file descriptor 0]
++ stdout[file descriptor 1]
++ stderr[file descriptor 2]
+
+Redirection of standard streams:
+--------------------------------
++ '< file'
++ '> file'
++ '2> file' redirects stderr to a file
++ '&> file' redirects stdout & stderr to a file
++ '2>&1' redirects stderr to stdout.
+______________
+
+______________
+
+tesla.com yahoo.com
+
+
+admin
+auth
+beta
+dev
+forum
+qa
+console
+login
+m
+blog
+store
+news
+doc
+test
+
+while read sub; do echo "$sub.tesla.com"; done < subdomains.txt
+		+
+if host cdac.in &> /dev/null; then echo "Resolved"; fi
+
+# vim sub-finder.sh
+
+#!/bin/bash
+domain=$1
+list=$2
+while read sub; do
+        if host "$sub.$domain" &> /dev/null;then
+                echo "$sub.$domain"
+        fi
+done < $list
+
+# bash sub-finder.sh yahoo.com subdomains.txt
+
+------
+TASKS:
+------
+while read sub; do echo "$sub.tesla.com"; done < all.txt  | xargs -P500 -I X bash -c "if host X &> /dev/null;then echo X;fi"
+
+Threads = 50
+
+
+For Subdomain list:
+cat domains.txt | xargs -P1000 -I@ bash -c "waybackurls '@'| cut -d'/' -f3 | cut -d'.' -f1 | sort -u"
+
+~~~~~~~~~~~~~~~~~~~~~~
+
+Functions:
+----------
+function_name () {
+<commands>
+}
+
+OR
+
+function function_name {
+<commands>
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#!/bin/bash
+a=$1
+
+
+case "$a" in
+        1 | 11)
+                echo "One"
+                ;;
+        2)
+                echo "Two"
+                ;;
+        *)
+                echo "Boom"
+                ;;
+esac
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# bash subz.sh -t domain.com -f file.txt
+
+# bash subz.sh --domain 
+
+
+Usage: bash subz.sh -d domain.com -l filename.txt
+[-d / --domain] : target
+[-l / --list] : filename
+[-] Unknown Option: tesla.com
+
+===============================
+Process Control:
+----------------
+Task managers:
+
+[+] top
+[+] htop
+
+# ps aux 
+# kill -9 PID
+
+-9 [Forcefully]
+
+# pkill firefox [ To kill the process with process name.]
+-----
+# sleep 10000 &
+# sleep 10000 &
+
+# jobs
+
+[-] second last addes in jobs
+[+] last added in jobs
+
+# jobs -l [ List with PID ]
+
+# fg %2 [Foreground]
+
+[ ctrl + z ]: stop & send it to bg
+
+# bg %2 [ To start ]
+--------------------------
+Wild Card (* ?)
+~~~~~~~~~~~~~~~~~~~
+
+?	A question-mark is a pattern that matches any single character.
+*	An asterisk is a pattern that matches any number of any characters, including the null 	string/none.
+
+
+
+eg: #ls /tmp/file*
++++++++++
+#ls
+pic1.jpg pic1.txt pic2.jpg pic3.jpg pic4.jpg pic5.jpg pic-big.jpg pic.jpg pic-small.jpg pic.txt pic1.txt pic2.txt pic1.bmp
+
+#ls pic?.jpg
+pic1.jpg pic2.jpg pic3.jpg pic4.jpg pic5.jpg
+
+
+RCE - WAF
+
+# /???/c?t /???/p??s??
+
+# ls *.???
+--------------------
+Metachar in Linux:[^ $]:
+________________________
+The caret ^ and the dollar sign $ are meta-characters that respectively match the empty string at the beginning and end of a line.
+
+Beginning of line ( ^ ):
+________________________
+The ^ (caret) symbol matches the empty string at the beginning of a line. 
+
+#cat /var/log/message | grep "^data"
+
+End of the line ( $):
+_____________________
+
+
+#cat /etc/passwd | grep "nologin$"
+
+You can also construct a regular expression using both anchors:
+_______________________________________________________________
+To find lines containing only “false”:
+
+#cat /etc/passwd | grep "^false$"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+nested if-else
+--------------
+#!/bin/bash
+read -p "Filename: " file
+if [ -f $file ]; then
+	if [ -w $file ]; then
+		echo "Enter text:"
+		cat >> $file
+	else
+		echo "Not writable"
+	fi
+else
+	echo "$file not found."
+fi
+==========================================
+# cat sub-finder.sh
+#!/bin/bash
+
+banner() {
+        figlet subz
+}
+Usage() {
+        echo "Usage: bash subz.sh -t domain.com -f filename.txt"
+        echo "[-t / --target] : target"
+        echo "[-f / --file] : filename"
+}
+sub-brute() {
+while read sub; do
+        if host "$sub.$target" &> /dev/null;then
+                echo "$sub.$target"
+        fi
+done < $file
+}
+target=False
+file=False
+list=(
+        banner
+        sub-brute
+        )
+while [ -n "$1" ]; do
+        case "$1" in
+                -t)
+                                target=$2
+                                shift
+                                ;;
+                -f)
+                                file=$2
+                                shift
+                                ;;
+                -h)
+                                Usage
+                                exit
+                                ;;
+                *)
+                        echo "[-] Unknown Option: $1"
+                        Usage
+                        exit
+                        ;;
+        esac
+        shift
+done
+[[ $target == "False" ]] && [[ $file == "False" ]] && {
+        echo " [-] Argument: -t/--target target.com -f/--file file.txt Required"
+}
+(
+banner
+sub-brute
+)
+_______________________________________________
+# cat cowin.sh
+
+#!/bin/bash
+read -p "Enter pincode: " pin
+echo "###########################"
+curl -ks "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=$pin&date=31-05-2021" |  jq -r '.centers[] | {Name:.name, Address:.address, Block:.block_name} | select(.name != null)'
